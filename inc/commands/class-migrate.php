@@ -47,6 +47,8 @@ class Migrate extends \WP_CLI_Command {
 			$post_ids = $all_posts->posts;
 		}
 
+		$progress = \WP_CLI\Utils\make_progress_bar( 'Migrating posts', count($post_ids) );
+
 		foreach( $post_ids as $post_id ) {
 			$post = get_post( $post_id );
 
@@ -74,9 +76,11 @@ class Migrate extends \WP_CLI_Command {
 				'post_content' => $content
 			) );
 
-			$count += 1;
+			WP_CLI::log( __( 'Post ID: ' . $post_id . ' has been migrated.', 'gutenberg-cli' ) );
+			$progress->tick();
 		}
 
+		$progress->finish();
 		WP_CLI::success( __( $count . ' post(s) migrated. Migration complete.', 'gutenberg-cli' ) );
 	}
 }
