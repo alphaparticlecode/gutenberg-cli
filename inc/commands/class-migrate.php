@@ -28,7 +28,12 @@ class Migrate extends \WP_CLI_Command {
 		$count = 0;
 
 		$approved_tags = [
-			'h4' => '<!-- wp:heading {"level":4} -->**<!-- /wp:heading -->'
+			'h1'  => '<!-- wp:heading {"level":1} -->**<!-- /wp:heading -->',
+			'h2'  => '<!-- wp:heading -->**<!-- /wp:heading -->',
+			'h3'  => '<!-- wp:heading {"level":3} -->**<!-- /wp:heading -->',
+			'h4'  => '<!-- wp:heading {"level":4} -->**<!-- /wp:heading -->',
+			'h5'  => '<!-- wp:heading {"level":5} -->**<!-- /wp:heading -->',
+			'h6'  => '<!-- wp:heading {"level":6} -->**<!-- /wp:heading -->',
 		];
 
 		if ( isset( $assoc_args['ids'] ) ) {
