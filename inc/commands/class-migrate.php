@@ -57,6 +57,11 @@ class Migrate extends \WP_CLI_Command {
 		foreach( $post_ids as $post_id ) {
 			$post = get_post( $post_id );
 
+			if ( preg_match('/<!-- wp/', $post->post_content ) ) {
+				WP_CLI::warning( "Skipping Post (id: $post_id) because it seems like it's already Gutenberg enabled.");
+				continue;
+			}
+
 			$content = apply_filters( 'the_content', $post->post_content );
 
 			$DOM = new \DOMDocument;
